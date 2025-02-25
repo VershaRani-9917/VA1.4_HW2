@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HTML</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        .input-container {
+            margin: 10px 0;
+        }
+        .input-container input, .input-container textarea {
+            margin-right: 10px;
+        }
+        .button-container {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="input-container">
+        <label for="wordsInput">What is JavaScript?:</label>
+        <textarea id="wordsInput" rows="4" cols="50"></textarea>
+        <div class="button-container">
+            <button id="showWordsBtn">Display Answer</button>
+            <button id="styleBtn1">Count Words</button>
+        </div>
+    </div>
+    <p id="nameResult1"></p>
+
+    <div class="input-container">
+        <label for="todoInput">List Todo:</label>
+        <textarea id="todoInput" rows="4" cols="50"></textarea>
+        <div class="button-container">
+            <button id="showTodoBtn">Display Todos</button>
+            <button id="styleBtn2">Count Todos</button>
+        </div>
+    </div>
+    <p id="nameResult2"></p>
+
+    <div class="input-container">
+        <label for="passwordInput">Enter password:</label>
+        <input type="password" id="passwordInput" />
+        <div class="button-container">
+            <button id="showPasswordBtn">Display Password</button>
+            <button id="styleBtn3">Check Password</button>
+        </div>
+    </div>
+    <p id="nameResult3"></p>
+
+    <script>
+        const wordsInput = document.querySelector("#wordsInput");
+        const showWordsBtn = document.querySelector("#showWordsBtn");
+        const nameResult1 = document.querySelector("#nameResult1");
+        const styleBtn1 = document.querySelector("#styleBtn1");
+
+        showWordsBtn.addEventListener("click", function() {
+            const wordsValue = wordsInput.value;
+            nameResult1.textContent = `Your Answer: ${wordsValue}`;
+        });
+
+        styleBtn1.addEventListener("click", function() {
+            const wordsValue = wordsInput.value.trim();
+            const wordCount = wordsValue ? wordsValue.split(/\s+/).length : 0;
+            nameResult1.style.color = wordCount > 7 ? "red" : "green";
+
+            if (wordCount > 7) {
+                nameResult1.innerHTML = `Your Answer: ${wordsValue}<br>Word count exceeding.`;
+            } else {
+                nameResult1.innerHTML = `Your Answer: ${wordsValue}<br>Good`;
+            }
+        });
+
+        const todoInput = document.querySelector("#todoInput");
+        const showTodoBtn = document.querySelector("#showTodoBtn");
+        const nameResult2 = document.querySelector("#nameResult2");
+        const styleBtn2 = document.querySelector("#styleBtn2");
+
+        showTodoBtn.addEventListener("click", function() {
+            const todoValue = todoInput.value;
+            nameResult2.textContent = `Your Todos: ${todoValue}`;
+        });
+
+        styleBtn2.addEventListener("click", function() {
+            const todoValue = todoInput.value.trim();
+            const todoCount = todoValue ? todoValue.split(/\s*,\s*/).length : 0; 
+            nameResult2.style.color = "green";
+            nameResult2.innerHTML = `Total number of todos: ${todoCount}`;
+        });
+
+        const passwordInput = document.querySelector("#passwordInput");
+        const showPasswordBtn = document.querySelector("#showPasswordBtn");
+        const nameResult3 = document.querySelector("#nameResult3");
+        const styleBtn3 = document.querySelector("#styleBtn3");
+
+        showPasswordBtn.addEventListener("click", function() {
+            const passwordValue = passwordInput.value;
+            nameResult3.textContent = `Your Password: ${passwordValue}`;
+        });
+
+        styleBtn3.addEventListener("click", function() {
+            const passwordValue = passwordInput.value
+            const specialChars = /[@ || ! ||$]/; 
+            if (passwordValue.length >= 5 && specialChars.test(passwordValue)) {
+                nameResult3.textContent = 'Password Accepted.';
+                nameResult3.style.color = 'green';
+            } else {
+                nameResult3.textContent = 'Invalid Password. Password should be more than 5 characters and must contain @, !, or $ symbol.';
+                nameResult3.style.color = 'red';
+            }
+        });
+    </script>
+</body>
+</html>
